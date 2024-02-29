@@ -1,16 +1,16 @@
-import React, { useState } from "react"
+import React, { useRef } from "react"
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom"
 import "./Login.css"
 
 export const Login = () => {
-    const [email, set] = useState("hpassfield7@netvibes.com")
+    const emailRef = useRef("hpassfield7@netvibes.com");
     const navigate = useNavigate()
 
     const handleLogin = (e) => {
         e.preventDefault()
 
-        return fetch(`http://localhost:8088/users?email=${email}`)
+        return fetch(`http://localhost:8088/users?email=${emailRef.current.value}`)
             .then(res => res.json())
             .then(foundUsers => {
                 if (foundUsers.length === 1) {
@@ -37,8 +37,7 @@ export const Login = () => {
                     <fieldset>
                         <label htmlFor="inputEmail"> Email address </label>
                         <input type="email"
-                            value={email}
-                            onChange={evt => set(evt.target.value)}
+                            ref={emailRef}
                             className="form-control"
                             placeholder="Email address"
                             required autoFocus />
