@@ -25,7 +25,7 @@ export const Register = (props) => {
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify(customer)
+            body: JSON.stringify(updatedCustomer)
         })
             .then(res => res.json())
             .then(createdUser => {
@@ -74,12 +74,7 @@ export const Register = (props) => {
                         placeholder="Email address" required />
                 </fieldset>
                 <fieldset>
-                    <input onChange={(evt) => {
-                        const copy = {...customer}
-                        copy.isStaff = evt.target.checked
-                        setCustomer(copy)
-                    }}
-                        type="checkbox" id="isStaff" />
+                <input ref={isStaffRef} type="checkbox" id="isStaff" />
                     <label htmlFor="email"> I am an employee </label>
                 </fieldset>
                 <fieldset>
